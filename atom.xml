@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-10-22T14:23:18.556Z</updated>
+  <updated>2025-10-22T14:32:59.861Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>代码</title>
+    <title>博客搭建</title>
     <link href="http://example.com/2025/10/22/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E7%BB%8F%E9%AA%8C/"/>
     <id>http://example.com/2025/10/22/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E7%BB%8F%E9%AA%8C/</id>
     <published>2025-10-22T14:00:00.000Z</published>
-    <updated>2025-10-22T14:23:18.556Z</updated>
+    <updated>2025-10-22T14:32:59.861Z</updated>
     
     <content type="html"><![CDATA[<p>我的博客是如何搭建的</p><span id="more"></span><p>试了试butterfly、shokaX，但没找到适合我的教程，尤其是shokaX感觉难度很大<br>无意间找到了找到了<a href="https://www.philoli.com/building-a-blog-from-scratch/">一篇教程</a>，非常适合我这种有一点前端知识的博客小白<br>于是依照这篇教程的流程走下来，没遇到过太大问题</p>]]></content>
     
