@@ -110,9 +110,9 @@
     
     <category term="搜索" scheme="http://example.com/tags/%E6%90%9C%E7%B4%A2/"/>
     
-    <category term="atcoder" scheme="http://example.com/tags/atcoder/"/>
-    
     <category term="需要重温" scheme="http://example.com/tags/%E9%9C%80%E8%A6%81%E9%87%8D%E6%B8%A9/"/>
+    
+    <category term="atcoder" scheme="http://example.com/tags/atcoder/"/>
     
   </entry>
   
