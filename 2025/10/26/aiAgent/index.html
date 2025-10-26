@@ -1,0 +1,551 @@
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="AI Agent初探">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI Agent初探">
+<meta property="og:url" content="http://example.com/2025/10/26/aiAgent/index.html">
+<meta property="og:site_name" content="chtholly-daisuki的小屋">
+<meta property="og:description" content="AI Agent初探">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-10-26T15:11:51.000Z">
+<meta property="article:modified_time" content="2025-10-26T15:28:56.091Z">
+<meta property="article:author" content="chtholly-daisuki">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2025/10/26/aiAgent/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>AI Agent初探 | chtholly-daisuki的小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="chtholly-daisuki的小屋" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">chtholly-daisuki的小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">「器用贫乏」</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/10/26/aiAgent/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chtholly-daisuki">
+      <meta itemprop="description" content="coding、文字和游戏">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chtholly-daisuki的小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AI Agent初探
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-10-26 23:11:51 / 修改时间：23:28:56" itemprop="dateCreated datePublished" datetime="2025-10-26T23:11:51+08:00">2025-10-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <center>AI Agent初探</center>
+<span id="more"></span>
+<h1>token来源</h1>
+<p><a target="_blank" rel="noopener" href="https://cloud.siliconflow.cn/me/models">硅基流动</a><br>新用户2000万tokens</p>
+<h1>简易的开放型AI</h1>
+<h2 id="vue版">vue版</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class="chat-app"&gt;</span><br><span class="line">        &lt;h1&gt;猫娘对话助手&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 对话历史区域 --&gt;</span><br><span class="line">        &lt;div class="chat-history"&gt;</span><br><span class="line">            &lt;div v-for="(message, index) in messages" :key="index" class="message"&gt;</span><br><span class="line">                &lt;div class="role" :class="message.role"&gt;</span><br><span class="line">                    {{ message.role === 'user' ? '你' : 'AI猫娘' }}:</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">                &lt;div class="content"&gt;{{ message.content }}&lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 输入区域 --&gt;</span><br><span class="line">        &lt;div class="input-area"&gt;</span><br><span class="line">            &lt;input type="text" v-model="userInput" placeholder="输入消息...（输入'退出'结束对话）" @keyup.enter="sendMessage"</span><br><span class="line">                :disabled="isLoading"&gt;</span><br><span class="line">            &lt;button @click="sendMessage" :disabled="isLoading || !userInput.trim()"&gt;</span><br><span class="line">                {{ isLoading ? '发送中...' : '发送' }}</span><br><span class="line">            &lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">import { ref } from 'vue';</span><br><span class="line"></span><br><span class="line">// 状态管理</span><br><span class="line">const userInput = ref('');</span><br><span class="line">const messages = ref([</span><br><span class="line">    { role: 'system', content: '你是一只猫娘' } // 系统提示词</span><br><span class="line">]);</span><br><span class="line">const isLoading = ref(false);</span><br><span class="line"></span><br><span class="line">// API配置 - 注意：实际应用中不要直接在前端暴露API密钥！</span><br><span class="line">const apiKey = '';</span><br><span class="line">const apiBaseUrl = 'https://api.siliconflow.cn/v1';</span><br><span class="line">const model = 'Qwen/Qwen2.5-72B-Instruct';</span><br><span class="line"></span><br><span class="line">// 发送消息函数</span><br><span class="line">const sendMessage = async () =&gt; {</span><br><span class="line">    const input = userInput.value.trim();</span><br><span class="line"></span><br><span class="line">    // 处理退出条件</span><br><span class="line">    if (input.toLowerCase() in ['退出', 'q', 'quit']) {</span><br><span class="line">        messages.value.push({ role: 'system', content: '对话结束！' });</span><br><span class="line">        userInput.value = '';</span><br><span class="line">        return;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    // 验证输入</span><br><span class="line">    if (!input) return;</span><br><span class="line"></span><br><span class="line">    // 添加用户消息到对话历史</span><br><span class="line">    messages.value.push({ role: 'user', content: input });</span><br><span class="line">    userInput.value = '';</span><br><span class="line">    isLoading.value = true;</span><br><span class="line"></span><br><span class="line">    try {</span><br><span class="line">        // 发送请求到AI API</span><br><span class="line">        const response = await fetch(`${apiBaseUrl}/chat/completions`, {</span><br><span class="line">            method: 'POST',</span><br><span class="line">            headers: {</span><br><span class="line">                'Content-Type': 'application/json',</span><br><span class="line">                'Authorization': `Bearer ${apiKey}`</span><br><span class="line">            },</span><br><span class="line">            body: JSON.stringify({</span><br><span class="line">                model,</span><br><span class="line">                messages: messages.value.filter(msg =&gt; msg.role !== 'system' || msg.content),</span><br><span class="line">                stream: false</span><br><span class="line">            })</span><br><span class="line">        });</span><br><span class="line"></span><br><span class="line">        if (!response.ok) {</span><br><span class="line">            throw new Error(`API请求失败: ${response.statusText}`);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        const data = await response.json();</span><br><span class="line"></span><br><span class="line">        // 获取AI回复并添加到对话历史</span><br><span class="line">        const aiResponse = data.choices[0].message.content;</span><br><span class="line">        messages.value.push({ role: 'assistant', content: aiResponse });</span><br><span class="line"></span><br><span class="line">    } catch (error) {</span><br><span class="line">        console.error('请求出错:', error);</span><br><span class="line">        messages.value.push({</span><br><span class="line">            role: 'system',</span><br><span class="line">            content: `发生错误: ${error.message}，请重试`</span><br><span class="line">        });</span><br><span class="line">    } finally {</span><br><span class="line">        isLoading.value = false;</span><br><span class="line">        // 自动滚动到底部</span><br><span class="line">        scrollToBottom();</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line">// 自动滚动到最新消息</span><br><span class="line">const scrollToBottom = () =&gt; {</span><br><span class="line">    const chatHistory = document.querySelector('.chat-history');</span><br><span class="line">    if (chatHistory) {</span><br><span class="line">        chatHistory.scrollTop = chatHistory.scrollHeight;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line">// 初始滚动到底部</span><br><span class="line">scrollToBottom();</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">.chat-app {</span><br><span class="line">    max-width: 800px;</span><br><span class="line">    margin: 0 auto;</span><br><span class="line">    padding: 20px;</span><br><span class="line">    font-family: Arial, sans-serif;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">.chat-history {</span><br><span class="line">    height: 500px;</span><br><span class="line">    border: 1px solid #e0e0e0;</span><br><span class="line">    border-radius: 8px;</span><br><span class="line">    padding: 15px;</span><br><span class="line">    margin-bottom: 20px;</span><br><span class="line">    overflow-y: auto;</span><br><span class="line">    background-color: #f9f9f9;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">.message {</span><br><span class="line">    margin-bottom: 15px;</span><br><span class="line">    padding: 10px;</span><br><span class="line">    border-radius: 6px;</span><br><span class="line">    max-width: 80%;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">.message.user {</span><br><span class="line">    margin-left: auto;</span><br><span class="line">    background-color: #e3f2fd;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">.message.assistant {</span><br><span class="line">    margin-right: auto;</span><br><span class="line">    background-color: #fff3e0;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">.message.system {</span><br><span class="line">    margin: 0 auto 15px;</span><br><span class="line">    background-color: #e8f5e9;</span><br><span class="line">    font-style: italic;</span><br><span class="line">    max-width: 100%;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">.role {</span><br><span class="line">    font-weight: bold;</span><br><span class="line">    margin-bottom: 5px;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">.role.user {</span><br><span class="line">    color: #1976d2;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">.role.assistant {</span><br><span class="line">    color: #f57c00;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">.input-area {</span><br><span class="line">    display: flex;</span><br><span class="line">    gap: 10px;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">input {</span><br><span class="line">    flex: 1;</span><br><span class="line">    padding: 10px;</span><br><span class="line">    border: 1px solid #ddd;</span><br><span class="line">    border-radius: 4px;</span><br><span class="line">    font-size: 16px;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">button {</span><br><span class="line">    padding: 10px 20px;</span><br><span class="line">    background-color: #4caf50;</span><br><span class="line">    color: white;</span><br><span class="line">    border: none;</span><br><span class="line">    border-radius: 4px;</span><br><span class="line">    cursor: pointer;</span><br><span class="line">    font-size: 16px;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">button:disabled {</span><br><span class="line">    background-color: #cccccc;</span><br><span class="line">    cursor: not-allowed;</span><br><span class="line">}</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="python版">python版</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 初始化客户端</span></span><br><span class="line">client = OpenAI(</span><br><span class="line">    api_key=<span class="string">""</span>,</span><br><span class="line">    base_url=<span class="string">"https://api.siliconflow.cn/v1"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 初始化messages列表（可添加系统提示词定义AI行为）</span></span><br><span class="line">messages = [</span><br><span class="line">    {<span class="string">"role"</span>: <span class="string">"system"</span>, <span class="string">"content"</span>: <span class="string">"你是一只猫娘"</span>}</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"开始对话（输入'退出'结束）："</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 循环获取用户输入，实现多轮对话</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="comment"># 获取用户输入</span></span><br><span class="line">    user_input = <span class="built_in">input</span>(<span class="string">"\n你："</span>)</span><br><span class="line">    <span class="comment"># 退出条件</span></span><br><span class="line">    <span class="keyword">if</span> user_input.lower() <span class="keyword">in</span> [<span class="string">"退出"</span>, <span class="string">"q"</span>, <span class="string">"quit"</span>]:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"对话结束！"</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="comment"># 过滤空输入</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> user_input.strip():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"请输入有效内容！"</span>)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 4. 将用户输入添加到messages（更新上下文）</span></span><br><span class="line">    messages.append({<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: user_input})</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 5. 提交messages给AI</span></span><br><span class="line">    response = client.chat.completions.create(</span><br><span class="line">        model=<span class="string">"Qwen/Qwen2.5-72B-Instruct"</span>,</span><br><span class="line">        messages=messages,</span><br><span class="line">        stream=<span class="literal">False</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 6. 获取AI回复并添加到messages（保存上下文）</span></span><br><span class="line">    ai_answer = response.choices[<span class="number">0</span>].message.content</span><br><span class="line">    messages.append({<span class="string">"role"</span>: <span class="string">"assistant"</span>, <span class="string">"content"</span>: ai_answer})</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 7. 打印AI回复</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f"AI：<span class="subst">{ai_answer}</span>"</span>)</span><br></pre></td></tr></table></figure>
+<h1>基于大语料库的AI</h1>
+<h2 id="python版-2">python版</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"><span class="keyword">import</span> tiktoken</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 初始化客户端</span></span><br><span class="line">client = OpenAI(</span><br><span class="line">    api_key=<span class="string">""</span>,</span><br><span class="line">    base_url=<span class="string">"https://api.siliconflow.cn/v1"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 读取纯独白语料（无场景，仅目标人物发言）</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load_pure_monologue</span>(<span class="params">file_path</span>):</span><br><span class="line">    <span class="string">"""读取纯独白语料，整理为模型可学习的示例格式"""</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(file_path, <span class="string">"r"</span>, encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        corpus = f.read().strip()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 按空行拆分独立的独白段落（根据实际语料格式调整，如换行分隔）</span></span><br><span class="line">    monologues = [m.strip() <span class="keyword">for</span> m <span class="keyword">in</span> corpus.split(<span class="string">"\n\n"</span>) <span class="keyword">if</span> m.strip()]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 转换为“引导语+目标人物回复”的示例（引导语用通用话题，让模型关联风格）</span></span><br><span class="line">    examples = []</span><br><span class="line">    <span class="keyword">for</span> mono <span class="keyword">in</span> monologues:</span><br><span class="line">        <span class="comment"># 用通用话题作为“用户输入”，对应目标人物的独白作为“回复”</span></span><br><span class="line">        <span class="comment"># 通用话题可选：“聊聊生活”“说说你的想法”“随便谈谈”等（不影响风格学习）</span></span><br><span class="line">        <span class="comment">#examples.append({"role": "user", "content": "聊聊你的想法"})</span></span><br><span class="line">        examples.append({<span class="string">"role"</span>: <span class="string">"assistant"</span>, <span class="string">"content"</span>: mono})</span><br><span class="line">    <span class="keyword">return</span> examples</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 加载语料并控制长度</span></span><br><span class="line">corpus_examples = load_pure_monologue(<span class="string">"pure_monologue.txt"</span>)  <span class="comment"># 替换为你的语料路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 估算tokens（控制初始上下文长度）</span></span><br><span class="line">encoder = tiktoken.get_encoding(<span class="string">"cl100k_base"</span>)</span><br><span class="line">max_initial_tokens = <span class="number">30000</span>  <span class="comment"># 初始语料+系统提示的最大tokens</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 系统提示：明确要求从纯独白中学习语言风格</span></span><br><span class="line">system_prompt = (</span><br><span class="line">    <span class="string">"你需要完全模仿目标人物的语言风格。以下是该人物的真实独白，请注意学习：\n"</span></span><br><span class="line">    <span class="string">"- 用词习惯（如常用“啊”“吧”等语气词，偏爱生活化词汇）；\n"</span></span><br><span class="line">    <span class="string">"- 句式结构（如短句为主）；\n"</span></span><br><span class="line">    <span class="string">"- 语气与情感（如有些压抑，渴望被爱，时常焦虑，真诚懵懂）；\n"</span></span><br><span class="line">    <span class="string">"- 倾向话题（如喜爱谈论女朋友相关的性压抑话题、喜爱扮演成魔怔米卫兵）。\n"</span></span><br><span class="line">    <span class="string">"无论用户问什么话题，请用上述风格回应，不要暴露模仿行为。"</span></span><br><span class="line">)</span><br><span class="line">system_tokens = <span class="built_in">len</span>(encoder.encode(system_prompt))</span><br><span class="line">example_tokens = <span class="number">0</span></span><br><span class="line">selected_examples = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 筛选语料示例（避免超长）</span></span><br><span class="line"><span class="keyword">for</span> example <span class="keyword">in</span> corpus_examples:</span><br><span class="line">    content_tokens = <span class="built_in">len</span>(encoder.encode(example[<span class="string">"content"</span>]))</span><br><span class="line">    <span class="keyword">if</span> system_tokens + example_tokens + content_tokens &lt;= max_initial_tokens:</span><br><span class="line">        selected_examples.append(example)</span><br><span class="line">        example_tokens += content_tokens</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 初始化对话上下文</span></span><br><span class="line">messages = [{<span class="string">"role"</span>: <span class="string">"system"</span>, <span class="string">"content"</span>: system_prompt}] + selected_examples</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"开始对话（输入任意话题，输入'退出'结束）："</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 多轮对话循环（用户输入话题，AI以目标人物风格回应）</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    user_input = <span class="built_in">input</span>(<span class="string">"\n你（输入话题）："</span>)</span><br><span class="line">    <span class="keyword">if</span> user_input.lower() <span class="keyword">in</span> [<span class="string">"退出"</span>, <span class="string">"q"</span>, <span class="string">"quit"</span>]:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"对话结束！"</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> user_input.strip():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"请输入有效话题"</span>)</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 添加用户话题到上下文</span></span><br><span class="line">    messages.append({<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: user_input})</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 调用模型生成模仿回复</span></span><br><span class="line">    response = client.chat.completions.create(</span><br><span class="line">        model=<span class="string">"Qwen/Qwen2.5-72B-Instruct"</span>,</span><br><span class="line">        messages=messages,</span><br><span class="line">        stream=<span class="literal">False</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 保存回复到上下文（维持风格一致性）</span></span><br><span class="line">    ai_answer = response.choices[<span class="number">0</span>].message.content</span><br><span class="line">    messages.append({<span class="string">"role"</span>: <span class="string">"assistant"</span>, <span class="string">"content"</span>: ai_answer})</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打印结果</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f"目标人物风格回复：<span class="subst">{ai_answer}</span>"</span>)</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/folder.css" type="text/css"><script src="/js/folder.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI/" rel="tag"># AI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/10/26/cf-round-1061-ABC%E9%A2%98%E8%A7%A3/" rel="prev" title="cf round 1061 ABC题解">
+      <i class="fa fa-chevron-left"></i> cf round 1061 ABC题解
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">token来源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">简易的开放型AI</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue%E7%89%88"><span class="nav-number">2.1.</span> <span class="nav-text">vue版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python%E7%89%88"><span class="nav-number">2.2.</span> <span class="nav-text">python版</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">基于大语料库的AI</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python%E7%89%88-2"><span class="nav-number">3.1.</span> <span class="nav-text">python版</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">chtholly-daisuki</p>
+  <div class="site-description" itemprop="description">coding、文字和游戏</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/chtholly-daisuki" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;chtholly-daisuki" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chtholly-daisuki</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+<script src="/js/code-unfold.js"></script>
+ 
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css">
+
+
+  
+
+</body>
+</html>
